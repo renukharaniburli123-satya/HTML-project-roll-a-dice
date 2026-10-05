@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Roll a Dice</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      background-image: url(dice.webp);
+      background-size: cover;
+    }
+
+    .container {
+      background: rgb(255, 255, 255);
+      padding: 40px;
+      border-radius: 20px;
+      text-align: center;
+      width: 350px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    h1 {
+      color: #333;
+      margin-bottom: 25px;
+    }
+
+    .dice {
+      font-size: 120px;
+      margin: 20px 0;
+      transition: transform 0.3s;
+    }
+
+    .roll-animation {
+      animation: roll 0.5s ease;
+    }
+
+    @keyframes roll {
+      0% {
+        transform: rotate(0deg);
+      }
+      25% {
+        transform: rotate(90deg);
+      }
+      50% {
+        transform: rotate(180deg);
+      }
+      75% {
+        transform: rotate(270deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    button {
+      background: #667eea;
+      color: rgb(255, 255, 255);
+      border: none;
+      padding: 12px 30px;
+      font-size: 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #5568d8;
+      transform: scale(1.05);
+    }
+
+    #result {
+      margin-top: 20px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #444;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <h1>🎲 Roll the Dice</h1>
+
+    <div id="dice" class="dice">⚀</div>
+
+    <button onclick="rollDice()">Roll Dice</button>
+
+    <p id="result">Click the button to roll!</p>
+  </div>
+
+  <script>
+    function rollDice() {
+      const dice = document.getElementById("dice");
+      const result = document.getElementById("result");
+
+      // Generate random number from 1 to 6
+      const randomNumber = Math.floor(Math.random() * 6) + 1;
+
+      // Dice symbols
+      const diceFaces = ["⚀", "⚁", "⚂", "⚃", "⚄", "⚅"];
+
+      // Add animation
+      dice.classList.remove("roll-animation");
+
+      // Force browser to restart animation
+      void dice.offsetWidth;
+
+      dice.classList.add("roll-animation");
+
+      // Change dice face
+      dice.textContent = diceFaces[randomNumber - 1];
+
+      // Show result
+      result.textContent = `You rolled: ${randomNumber}`;
+    }
+  </script>
+
+</body>
+</html>
